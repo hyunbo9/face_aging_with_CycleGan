@@ -188,7 +188,7 @@ class cyclegan():
                 #[fake_A, fake_B] = self.pool([fake_A, fake_B])
 
                 # Update D network
-                self.sess.run( [self.d_optim, self.hyunbo_optim],
+                self.sess.run( [self.d_optim],
                                feed_dict={self.real_data: batch_images,
                                     self.fake_A_sample: fake_A,
                                     self.fake_B_sample: fake_B,
