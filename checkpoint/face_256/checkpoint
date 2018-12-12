@@ -1,0 +1,2 @@
+model_checkpoint_path: "cyclegan.model-33002"
+all_model_checkpoint_paths: "cyclegan.model-33002"
