@@ -20,9 +20,9 @@ Source: <a href="https://susanqq.github.io/UTKFace/" target="_blank">UTKFace - L
 
 
 <p align="center">
-  <img src="./datasets/face/20s_to_50s.png" width="500">
+  <img src="./datasets/face/20s_to_50s.png" width="700"><br>
   <b><I>20s to 50s</I></b>
   <br><br>
-  <img src="./datasets/face/50s_to_20s.png" width="500">
+  <img src="./datasets/face/50s_to_20s.png" width="700"><br>
   <b><I>50s to 20s</I></b>
 </p>
