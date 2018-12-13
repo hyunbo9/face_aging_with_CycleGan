@@ -30,3 +30,6 @@ Source: <a href="https://susanqq.github.io/UTKFace/" target="_blank">UTKFace - L
 <p align="center">
   <img src="./datasets/face/cyclic_consistency.png"><br>
 </p>
+
+<br>
+Detailed descriptions as PDF file @ <a href="./Face Aging using CycleGAN.pdf" target="_blank">Face Aging using CycleGAN</a>
