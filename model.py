@@ -65,6 +65,7 @@ class cyclegan():
         self.real_B = self.real_data[:, :, :, self.input_c_dim:self.input_c_dim + self.output_c_dim] # real B
         self.fake_B = self.generator(self.real_A, self.options, False, name="generatorA2B")     # A를 가짜 B로 바꾸기.
         self.fake_A_ = self.generator(self.fake_B, self.options, False, name="generatorB2A")    # 가짜 B를 가짜 A로 바꾸기
+
         # 앞에 이미 정의한 거라서 reuse를 사용함.
         self.fake_A = self.generator(self.real_B, self.options, True, name="generatorB2A")      # 진짜 B를 가짜 A로 바꾸기
         self.fake_B_ = self.generator(self.fake_A, self.options, True, name="generatorA2B")     # 가짜 A를 가짜 B로 바꾸기

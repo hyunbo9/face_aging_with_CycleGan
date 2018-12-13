@@ -40,19 +40,17 @@ def generator_resnet(image, options, reuse=False, name="generator"):
 
         def residule_block(x, dim, ks=3, s=1, name='res'):
             p = int((ks - 1) / 2)
-            y = tf.pad(x, [[0, 0], [p, p], [p, p], [0, 0]], "REFLECT")      # padding은 양옆 위아래로 1씩만. p 가 패딩 값.
+            y = tf.pad(x, [[0, 0], [p, p], [p, p], [0, 0]], "REFLECT")      # padding은 양옆 위아래로 1씩만.
 
             # instance_norm은 nomalization.
             y = instance_norm(conv2d(y, dim, ks, s, padding='VALID', name=name+'_c1'), name+'_bn1')
             y = tf.pad(tf.nn.relu(y), [[0, 0], [p, p], [p, p], [0, 0]], "REFLECT")
             y = instance_norm(conv2d(y, dim, ks, s, padding='VALID', name=name+'_c2'), name+'_bn2')
-            return y + x            # 1/2을 안해도 되나??? 뒤에 노말라이즈해서 상관없는건가....
+            return y + x
 
-        # Justin Johnson's model from https://github.com/jcjohnson/fast-neural-style/
-        # The network with 9 blocks consists of: c7s1-32, d64, d128, R128, R128, R128,
-        # R128, R128, R128, R128, R128, R128, u64, u32, c7s1-3
+
         c0 = tf.pad(image, [[0, 0], [3, 3], [3, 3], [0, 0]], "REFLECT")     # 위 아래 가로 세로로 패딩 3씩.
-        c1 = tf.nn.relu(instance_norm(conv2d(c0, options.gf_dim, 7, 1, padding='VALID', name='g_e1_c'), 'g_e1_bn'))     # 패딩을 이미해서 valid인듯.
+        c1 = tf.nn.relu(instance_norm(conv2d(c0, options.gf_dim, 7, 1, padding='VALID', name='g_e1_c'), 'g_e1_bn'))
         c2 = tf.nn.relu(instance_norm(conv2d(c1, options.gf_dim*2, 3, 2, name='g_e2_c'), 'g_e2_bn'))
         c3 = tf.nn.relu(instance_norm(conv2d(c2, options.gf_dim*4, 3, 2, name='g_e3_c'), 'g_e3_bn'))        # 64 *64
 
@@ -228,7 +226,7 @@ def center_crop(x, crop_h, crop_w,
       x[j:j+crop_h, i:i+crop_w], [resize_h, resize_w])
 
 def transform(image, npx=64, is_crop=True, resize_w=64):
-    # npx : # of pixels width/height of image
+
     if is_crop:
         cropped_image = center_crop(image, npx, resize_w=resize_w)
     else:
