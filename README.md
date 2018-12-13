@@ -32,4 +32,4 @@ Source: <a href="https://susanqq.github.io/UTKFace/" target="_blank">UTKFace - L
 </p>
 
 <br>
-Detailed descriptions as PDF file @ <a href="./Face Aging using CycleGAN.pdf" target="_blank">Face Aging using CycleGAN</a>
+<b>Detailed description with PDF file @ <a href="./Face Aging using CycleGAN.pdf" target="_blank">Face Aging using CycleGAN</a></b>
