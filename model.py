@@ -24,7 +24,7 @@ class cyclegan():
         self.beta1 = 0.5        # adam 두번째 옵션
         self.epoch = 200        # 200에폭 돌려라.
         self.epoch_step = 100   # lr를 줄이는 스탭
-        self.train_size = 1e8   # 훈련시 이미지 갯수??
+        self.train_size = 1e8   # 훈련시 이미지 갯수
         self.lr_init = 0.0002        # 최초의 lr
         self.load_size = 286
         self.save_freq = 500    # 저장 빈도
@@ -58,7 +58,7 @@ class cyclegan():
     def _build_model(self):
         self.real_data = tf.placeholder(tf.float32,
                                         [None, self.image_size, self.image_size,
-                                         self.input_c_dim + self.output_c_dim],     # input 이미지 채널과 output 이미지 채널 수  # 아마 둘다 3. RGB라서.
+                                         self.input_c_dim + self.output_c_dim],     # input 이미지 채널과 output 이미지 채널 수  # 둘다 3. RGB라서.
                                         name='real_A_and_B_images')
 
         self.real_A = self.real_data[:, :, :, :self.input_c_dim]            # self.real_data의 앞부분, 즉 real A
@@ -69,7 +69,7 @@ class cyclegan():
         # 앞에 이미 정의한 거라서 reuse를 사용함.
         self.fake_A = self.generator(self.real_B, self.options, True, name="generatorB2A")      # 진짜 B를 가짜 A로 바꾸기
         self.fake_B_ = self.generator(self.fake_A, self.options, True, name="generatorA2B")     # 가짜 A를 가짜 B로 바꾸기
-        self.DB_fake = self.discriminator(self.fake_B, self.options, reuse=False, name="discriminatorB")        # 32 BY 32 가 나와..
+        self.DB_fake = self.discriminator(self.fake_B, self.options, reuse=False, name="discriminatorB")        # 32 BY 32 
         self.DA_fake = self.discriminator(self.fake_A, self.options, reuse=False, name="discriminatorA")
 
         """  G & F 를 학습 시키키 위해 필요한 최종 loss  """
@@ -87,7 +87,7 @@ class cyclegan():
 
         #########################################################"""
         """ =============================== 여기부터는 D의 학습입니다. =========================="""
-        # 대문자 D를 함수 처럼 작용하는 듯.
+        
         self.fake_A_sample = tf.placeholder(tf.float32,
                                             [None, self.image_size, self.image_size,
                                              self.input_c_dim], name='fake_A_sample')
@@ -185,8 +185,7 @@ class cyclegan():
                     [self.fake_A, self.fake_B, self.g_optim],
                     feed_dict={self.real_data: batch_images, self.lr_var: lr})
 
-                #self.writer.add_summary(summary_str, counter)
-                #[fake_A, fake_B] = self.pool([fake_A, fake_B])
+
 
                 # Update D network
                 self.sess.run( [self.d_optim],
