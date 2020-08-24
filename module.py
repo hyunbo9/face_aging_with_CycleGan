@@ -18,15 +18,15 @@ def discriminator(image, options, reuse=False, name="discriminator"):
             assert tf.get_variable_scope().reuse is False
 
         h0 = lrelu(conv2d(image, options.df_dim, name='d_h0_conv'))
-        # h0 is (128 x 128 x self.df_dim)
+        # (128 x 128 x self.df_dim)
         h1 = lrelu(instance_norm(conv2d(h0, options.df_dim*2, name='d_h1_conv'), 'd_bn1'))
-        # h1 is (64 x 64 x self.df_dim*2)
+        # (64 x 64 x self.df_dim*2)
         h2 = lrelu(instance_norm(conv2d(h1, options.df_dim*4, name='d_h2_conv'), 'd_bn2'))
-        # h2 is (32x 32 x self.df_dim*4)
+        # (32x 32 x self.df_dim*4)
         h3 = lrelu(instance_norm(conv2d(h2, options.df_dim*8, s=1, name='d_h3_conv'), 'd_bn3'))
-        # h3 is (32 x 32 x self.df_dim*8)
+        # (32 x 32 x self.df_dim*8)
         h4 = conv2d(h3, 1, s=1, name='d_h3_pred')
-        # h4 is (32 x 32 x 1)
+        # (32 x 32 x 1)
         return h4
 
 def generator_resnet(image, options, reuse=False, name="generator"):
@@ -168,7 +168,7 @@ def load_train_data(image_path, load_size=286, fine_size=256, is_testing=False):
         img_B = scipy.misc.imresize(img_B, [load_size, load_size])
         h1 = int(np.ceil(np.random.uniform(1e-2, load_size-fine_size))) # 1에서 load_size-fine_size 사이의 값 하나.
         w1 = int(np.ceil(np.random.uniform(1e-2, load_size-fine_size)))
-        img_A = img_A[h1:h1+fine_size, w1:w1+fine_size]         # 이미지를 랜덤하게 컷팅... why??
+        img_A = img_A[h1:h1+fine_size, w1:w1+fine_size]         # 이미지를 랜덤하게 컷팅... 
         img_B = img_B[h1:h1+fine_size, w1:w1+fine_size]
 
         if np.random.random() > 0.5:                # 50프로 확률로 이미지 뒤집기
